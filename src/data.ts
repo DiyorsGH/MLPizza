@@ -46,8 +46,6 @@ export const pizzaData: PizzaDataType[] = [
 { purchase: 135,img: "../src/public/images/pizzaImages/chillGrill.avif", name: "Chill Grill", ingredients: "Chicken, pickles, red onion, grill sauce, mozzarella, garlic, signature Alfredo sauce", price: 280, pizzaType: "new", pizzaCategory: "chicken"},
 { purchase: 136,img: "../src/public/images/pizzaImages/pepperoni.avif", name: "Pepperoni", ingredients: "Spicy pepperoni, mozzarella cheese and creamy Alfredo sauce", price: 300, pizzaType: "classic", pizzaCategory: "meat"},
 { purchase: 137,img: "../src/public/images/pizzaImages/doubleChicken.avif", name: "Double Chicken", ingredients: "Whole milk mozzarella, alfredo sauce, double the chicken, double the fun", price: 330, pizzaType: "new", pizzaCategory: "chicken"},
-{ purchase: 138,img: "../src/public/images/pizzaImages/faris.jpg", name: "The Black Honored one", ingredients: "black chocolate, nutella, snickers, eggs, Africa", price: Infinity, pizzaType: "new", pizzaCategory: "vegetarian"},
-{ purchase: 139,img: "../src/public/images/pizzaImages/amira.jpg", name: "Beliy ruskiy devochka", ingredients: "marshmallow, my little pony, ice-cream, buldak ", price: 67, pizzaType: "new", pizzaCategory: "spicy"},
 { purchase: 120,img: "../src/public/images/pizzaImages/cheeseChick.svg", name: "Cheese Chicken", ingredients: "Chicken, mozzarella, cheddar and parmesan cheeses, cheese sauce, alfredo sauce, garlic", price: 395, pizzaType: "new", pizzaCategory: "chicken"},
 { purchase: 121,img: "../src/public/images/pizzaImages/diablo.svg", name: "Diablo", ingredients: "Hot chorizo, jalapeño, barbecue sauce, meatballs, tomatoes, bell peppers, red onion, mozzarella", price: 320, pizzaType: "new", pizzaCategory: "spicy"}
 ]
