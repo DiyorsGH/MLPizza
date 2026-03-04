@@ -1,94 +1,145 @@
-import { useEffect, useRef } from "react";
+        import { useEffect, useRef, createContext } from "react";
 
-import Counter from "./Counter"
-import type { PizzaDataType } from "../data"
-import { emptyCart } from "../data"
+        import CartModalPizza from "./CartModalPizza";
+        import CartModalFooterItems from "./CartModalFooterItems";
+        import type { PizzaDataType } from "../data";
+        import { emptyCart } from "../data";
 
-export default function CartModal({
-    onClose,
-    cartItems,
-    onChangeCount,
-}: {
-    onClose: () => void
-    cartItems: { pizza: PizzaDataType; count: number }[]
-    onChangeCount: (pizza: PizzaDataType, newCount: number) => void
-}) {
-    const dialogRef = useRef<HTMLDialogElement>(null)
+        export const PizzaContext = createContext<{
+        onChangeCount: (pizza: PizzaDataType, newCount: number) => void;
+        } | null>(null);
 
-    useEffect(() => {
-        const dialog = dialogRef.current
-        if (!dialog) return
-        dialog.classList.add("cartModalAppear")
+        export default function CartModal({
+        onClose,
+        cartItems,
+        onChangeCount,
+        overallAmount,
+        totalPrice
+        }: {
+        onClose: () => void;
+        cartItems: {
+            pizza: PizzaDataType;
+            count: number;
+            size?: string | null;
+            crust?: string | null;
+            adds?: string[] | null;
+            addsPrice: number;
+        }[];
+        onChangeCount: (pizza: PizzaDataType, newCount: number) => void;
+        overallAmount: number;
+        totalPrice: number;
+        }) {
+        const dialogRef = useRef<HTMLDialogElement>(null);
+        const closeBtnRef = useRef<HTMLButtonElement>(null);
 
-        dialog.showModal()
 
-        let isClosing = false
-        const fadeOutAndClose = () => {
-            if (isClosing) return
-            isClosing = true
-            dialog.classList.remove("cartModalAppear")
-            dialog.classList.add("cartModalDisappear")
+        useEffect(() => {
+            const dialog = dialogRef.current;
+            if (!dialog) return;
+
+            dialog.classList.add("cartModalAppear");
+            dialog.showModal();
+
+            let isClosing = false;
+            const fadeOutAndClose = () => {
+            if (isClosing) return;
+            isClosing = true;
+            dialog.classList.remove("cartModalAppear");
+            dialog.classList.add("cartModalDisappear");
             setTimeout(() => {
-                dialog.classList.remove("cartModalDisappear")
-                dialog.close()
-                onClose()
-            }, 300)
-        }
+                dialog.classList.remove("cartModalDisappear");
+                dialog.close();
+                onClose();
+            }, 300);
+            };
 
-        (dialog as any)._fadeOutAndClose = fadeOutAndClose
+            (dialog as any)._fadeOutAndClose = fadeOutAndClose;
 
-    return () => {
-      delete (dialog as any)._fadeOutAndClose
-    }
-    }, [onClose])
-    return (
-        <dialog
+            return () => {
+            delete (dialog as any)._fadeOutAndClose;
+            };
+        }, [onClose]);
+
+
+        return (
+            <dialog
             ref={dialogRef}
-            // browsers impose a default max-height on <dialog> (often ~75vh)
-            // which prevents it from ever reaching 100vh. add a utility to
-            // override that so the element can truly span the viewport.
-            className="fixed w-[30vw] h-[100vh] max-h-none bg-blue-50 rounded-l-xl flex flex-col z-[60] ml-[70%] backdrop:m-0 p-4"
-        >
-        <h1 className="text-2xl font-bold mb-4">Cart</h1>
-        {cartItems.length === 0 ? (
-            <div className="flex flex-col items-center justify-center flex-1">
-                <img
-                    src={emptyCart}
-                    alt="Empty cart"
-                    className="w-32 h-32 opacity-50"
-                />
+            className="fixed w-[30vw] h-[100vh] max-h-none bg-[var(--gray)] rounded-l-xl flex flex-col z-[60] ml-[70%] backdrop:m-0 "
+            >
+            <div className="w-full h-[10%] flex justify-between items-center p-4">
+                <p className="text-3xl m-4">
+                <span className="font-bold">{overallAmount} items</span> in the cart
+                </p>
+                <button
+                onClick={() => {
+                    const dialog = dialogRef.current;
+                    if (!dialog) return;
+                    if (typeof (dialog as any)._fadeOutAndClose === "function") {
+                    (dialog as any)._fadeOutAndClose();
+                    }
+                }}
+                ref={closeBtnRef}
+                className="closeBtn absolute top-4 right-4 text-4xl"
+                >
+                ×
+                </button>
+            </div>
+
+            {cartItems.length === 0 ? (
+                <div className="flex flex-col items-center justify-center flex-1">
+                <img src={emptyCart} alt="Empty cart" className="w-[50%]" />
                 <p className="text-gray-600 mt-4">Your cart is empty</p>
-            </div>
-        ) : (
-            <div className="flex-1 overflow-y-auto space-y-4">
-                {cartItems.map(({ pizza, count }) => (
-                    <div
-                        key={pizza.name}
-                        className="flex items-center justify-between p-2 bg-white rounded-lg shadow"
-                    >
-                        <div className="flex-1">
-                            <p className="font-medium">{pizza.name}</p>
-                        </div>
-                        <Counter
-                            count={count}
-                            setCount={(c) => onChangeCount(pizza, c)}
+                <button
+                    className="orangeBtn-styles px-5 py-3 mt-4 text-[1.25rem]"
+                    onClick={() => {
+                    const dialog = dialogRef.current;
+                    if (!dialog) return;
+                    if (typeof (dialog as any)._fadeOutAndClose === "function") {
+                        (dialog as any)._fadeOutAndClose();
+                    }
+                    }}
+                    ref={closeBtnRef}
+                >
+                    ← Start Shopping
+                </button>
+                </div>
+            ) : (
+                <>
+                <PizzaContext.Provider value={{ onChangeCount }}>
+                    <div className="flex-1 overflow-y-auto space-y-4 hide-scrollbar">
+                    {cartItems.map(({ pizza, count, size, crust, adds, addsPrice }) => (
+                        <CartModalPizza
+                        key={pizza.name} // важно: key
+                        pizza={pizza}
+                        count={count}
+                        size={size}
+                        crust={crust}
+                        adds={adds}
+                        addsPrice={addsPrice}
                         />
+                    
+                    ))}
                     </div>
-                ))}
-            </div>
-        )}
-        <button
-            className="mt-4 self-end px-4 py-2 bg-red-500 text-white rounded"
-            onClick={() => {
-            const dialog = dialogRef.current
-            if (!dialog) return
-            if (typeof (dialog as any)._fadeOutAndClose === "function") {
-              (dialog as any)._fadeOutAndClose()
-            }
-          }}
-        >
-            Close
-        </button>
-        </dialog>
-    );
-}
+                </PizzaContext.Provider>
+                <div className="w-full h-[26%] bg-white flex flex-col items-center justify-center p-4 border-t-2 border-[var(--gray-dark)] gap-10">
+                    <CartModalFooterItems text="Total" value={totalPrice} />
+                    <CartModalFooterItems text="Tax 5%" value={totalPrice * 0.05} />
+                    <button
+                    className="orangeBtn-styles w-full py-3 text-[1.25rem]"
+                    onClick={() => {
+                        const dialog = dialogRef.current;
+                        if (!dialog) return;
+                        if (typeof (dialog as any)._fadeOutAndClose === "function") {
+                        (dialog as any)._fadeOutAndClose();
+                        }
+                    }}
+                    ref={closeBtnRef}
+                    >
+                    Checkout →
+                    </button>
+                </div>
+                </>
+            )}
+            </dialog>
+        );
+        }

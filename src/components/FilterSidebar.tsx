@@ -53,7 +53,7 @@ export default function FilterSidebar({
             <SidebarListItem text="New" checked={draftSelectedPizzaTypes.includes("new")} onCheckChange={handlePizzaTypeChange} />
             <SidebarListItem text="Classic" checked={draftSelectedPizzaTypes.includes("classic")} onCheckChange={handlePizzaTypeChange} />
 
-            <Line width="w-full" />
+            <Line width="w-full" isMargin={true}/>
 
             <Title titleContent="Price from & to" fontSize="text-xl" margin="mb-3" />
             <div className="flex gap-4">
@@ -61,7 +61,7 @@ export default function FilterSidebar({
                 <SidebarPriceInput currency="$" value={draftPriceTo} onChange={setDraftPriceTo} />
             </div>
 
-            <Line width="w-full" />
+            <Line width="w-full" isMargin={true}/>
 
             <Title titleContent="Ingredients" fontSize="text-xl" margin="mb-3" />
             {sidebarIngredients.map(ingredient => (

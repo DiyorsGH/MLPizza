@@ -6,7 +6,7 @@ export default function Counter({
   setCount: (c: number) => void
 }) {
   return (
-    <div className="w-[80%] flex items-center justify-between">
+    <div className="w-fit flex items-center justify-between gap-3">
       
       <button
         className="hover:brightness-95 w-8 h-8 bg-[var(--orange)] text-white text-[1.2rem] rounded-lg flex items-center justify-center active:scale-[0.96]"

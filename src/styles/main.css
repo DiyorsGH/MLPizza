@@ -8,7 +8,7 @@
   --orange: #FE5F00;
   --orange-light: #f7eee3;
   --gray: #ececec;
-  --gray-dark: #f2f2f2;
+  --gray-dark: #efeeee;
 }
 
 body {
@@ -131,4 +131,22 @@ body {
     opacity: 0;
     transform: translateX(20px);
   }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}
+
+.orangeBtn-styles {
+    background-color: var(--orange);
+    color: white;
+    border-radius: 0.75rem; 
+}
+
+
+.dots {
+    flex: 1;
+    border-bottom: 2px violet dotted;
+    margin: 0 8px;
 }
