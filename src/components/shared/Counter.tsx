@@ -1,0 +1,30 @@
+// refactored
+
+export default function Counter({
+    count,
+    setCount,
+}: {
+    count: number
+    setCount: (count: number) => void
+}) {
+    const decrement = () => setCount(count > 0 ? count - 1 : 0)
+    const increment = () => setCount(count + 1)
+
+    return (
+        <div className="w-fit flex items-center justify-between gap-3">
+            <button
+                className="hover:brightness-95 w-8 h-8 bg-[var(--orange)] text-white text-[1.2rem] rounded-lg flex items-center justify-center active:scale-[0.96]"
+                onClick={decrement}
+            >
+            −
+            </button>
+            <span className="text-lg font-bold">{count}</span>
+            <button
+                className="hover:brightness-95 w-8 h-8 bg-[var(--orange)] text-white text-[1.2rem] rounded-lg flex items-center justify-center active:scale-[0.96]"
+                onClick={increment}
+            >
+            +
+            </button>
+        </div>
+    )
+}

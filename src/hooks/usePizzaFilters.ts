@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react"
-import { pizzaData } from "./data"
+import { pizzaData } from "../data/data"
 
 export default function usePizzaFilters() {
   const [headerSearchQuery, setHeaderSearchQuery] = useState("")

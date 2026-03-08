@@ -1,6 +1,6 @@
-import Counter from "./Counter";
-import Line from "./Line";
-import type { PizzaDataType } from "../data";
+import Counter from "../shared/Counter";
+import Line from "../shared/Line";
+import type { PizzaDataType } from "../../data/data";
 import { useContext } from "react";
 import { PizzaContext } from "./CartModal";
 

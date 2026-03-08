@@ -1,7 +1,7 @@
 import SidebarListItem from "./SidebarListItem"
-import Line from "./Line"
+import Line from "../shared/Line"
 import SidebarPriceInput from "./SidebarPriceInput"
-import Title from "./Title"
+import Title from "../shared/Title"
 import type { Dispatch, SetStateAction } from "react"
 
 type FilterSidebarProps = {

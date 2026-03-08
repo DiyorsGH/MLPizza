@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-
-export default function Segmentbar({
+export default function CategorySegmentbar({
     elems,
     selectedIndex = 0,
     onSelect,
@@ -38,7 +37,7 @@ export default function Segmentbar({
     return (
         <div
         ref={ref}
-        className={`relative flex ${width} ${height} bg-[var(--gray)] rounded-xl overflow-hidden px-2`}
+        className={`indicatorBox relative flex ${width} ${height} bg-[var(--gray)] rounded-xl overflow-hidden px-2`}
         >
         {elems.map((el, i) => (
             <button
@@ -53,7 +52,7 @@ export default function Segmentbar({
         ))}
 
         <div
-            className="absolute top-1/2 h-[75%] bg-white rounded-xl -translate-y-1/2 transition-all duration-300 z-0 shadow-md"
+            className="absolute top-1/2 h-[75%] bg-white rounded-xl -translate-y-1/2 transition-all duration-300 z-0 shadow-md indicator"
             style={style}
         />   
         </div>

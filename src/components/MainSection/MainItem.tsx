@@ -1,7 +1,8 @@
-// removed unused useState import
-import Counter from "./Counter"
-import { plus, detectTags } from "../data"
-import type { PizzaCategoryT, PizzaDataType, PizzaTypeT } from "../data"
+import { useState, useEffect } from "react"
+import Counter from "../shared/Counter"
+import Line from "../shared/Line"
+import { plus, detectTags } from "../../data/data"
+import type { PizzaCategoryT, PizzaDataType, PizzaTypeT } from "../../data/data"
 
 export default function MainItem({
   img,
@@ -26,30 +27,50 @@ export default function MainItem({
   count: number
   setCount: (c: number) => void
 }) {
-  // count is now controlled by parent (cart)
+  const [loading, setLoading] = useState(true)
   const pizzaCount = count
-
   const tags = detectTags(pizzaCategory)
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (loading) {
+    // Skeleton Loader
+    return (
+      <div className="card-container border-2 border-[var(--gray)] rounded-2xl bg-white shadow-sm flex flex-col overflow-hidden w-full h-full animate-skeleton-fade">
+        <div className="relative w-full h-[140px] flex items-center justify-center bg-white">
+          <div className="w-[120px] h-[120px] rounded-full bg-[var(--gray)] skeleton" />
+        </div>
+        <Line width="w-full"/>
+        <div className="p-3 px-4 flex flex-col justify-between h-[132px] bg-white">
+          <div className="w-[120px] h-[20px] bg-[var(--gray)] rounded-xl skeleton"></div>
+          <div className="h-[30px] w-full bg-[var(--gray)] rounded-xl skeleton"></div>
+          <div className="flex justify-between items-center">
+            <div className="h-[20px] w-[50px] bg-[var(--gray)] rounded-xl skeleton"></div>
+            <div className="w-[70px] h-[20px] bg-[var(--gray)] rounded-xl skeleton"></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Real card
   return (
     <div 
-      className="border-2 border-[var(--gray)] rounded-2xl bg-white shadow-sm hover:shadow-xl hover:translate-y-[-3px] hover:translate-x-[-3px] transition flex flex-col overflow-hidden w-full h-full cursor-not-allowed"
+      className="border-2 border-[var(--gray)] rounded-2xl bg-white shadow-sm hover:shadow-xl hover:translate-y-[-3px] hover:translate-x-[-3px] transition flex flex-col overflow-hidden w-full h-full"
     >
-      
       <div className="relative w-full h-[140px] flex items-center justify-center bg-orange-50">
-        
         {tags.length > 0 && (
           <div className="absolute top-4 right-4 flex flex-col gap-1 items-end z-10">
             {tags.map(tag => (
-              <div
-                key={tag.key}
-              >
+              <div key={tag.key}>
                 <img src={tag.img} alt={tag.key} className={`w-${tag.width} h-${tag.height}`} />
               </div>
             ))}
           </div>
         )}
-
         <img
           src={img}
           alt={name}
@@ -59,12 +80,9 @@ export default function MainItem({
       </div>
 
       <div className="p-2 px-4 flex flex-col justify-between h-[132px]">
-        
         <span className="text-[1.2rem] font-bold">{name}</span>
 
-        <p className="text-[0.8rem] text-gray-600 flex-1">
-          {ingredients}
-        </p>
+        <p className="text-[0.8rem] text-gray-600 flex-1">{ingredients}</p>
 
         <div className="flex justify-between items-center">
           <p className="text-lg font-bold">{price} $</p>

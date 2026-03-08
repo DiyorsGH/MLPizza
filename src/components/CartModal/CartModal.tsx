@@ -2,8 +2,9 @@
 
         import CartModalPizza from "./CartModalPizza";
         import CartModalFooterItems from "./CartModalFooterItems";
-        import type { PizzaDataType } from "../data";
-        import { emptyCart } from "../data";
+        import type { PizzaDataType } from "../../data/data";
+        import { emptyCart } from "../../data/data";
+import { Link } from "react-router-dom";
 
         export const PizzaContext = createContext<{
         onChangeCount: (pizza: PizzaDataType, newCount: number) => void;
@@ -124,6 +125,7 @@
                 <div className="w-full h-[26%] bg-white flex flex-col items-center justify-center p-4 border-t-2 border-[var(--gray-dark)] gap-10">
                     <CartModalFooterItems text="Total" value={totalPrice} />
                     <CartModalFooterItems text="Tax 5%" value={totalPrice * 0.05} />
+                    <Link to="/checkout" className="w-full">
                     <button
                     className="orangeBtn-styles w-full py-3 text-[1.25rem]"
                     onClick={() => {
@@ -137,6 +139,8 @@
                     >
                     Checkout →
                     </button>
+                    </Link>
+                    
                 </div>
                 </>
             )}

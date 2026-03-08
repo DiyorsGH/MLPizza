@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import type { PizzaDataType } from "../data";
-import Title from "./Title";
+import type { PizzaDataType } from "../../data/data";
+import { addsData } from "../../data/data";
+import Title from "../shared/Title";
 import ToppingsSegmentbar from "./ToppingsSegmentbar";
 import ToppingsAdds from "./ToppingsAdds";
 
@@ -24,12 +25,6 @@ export default function ToppingsModal({
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedCrust, setSelectedCrust] = useState<string | null>(null);
   const [selectedAdds, setSelectedAdds] = useState<string[]>([]);
-
-  const addsData = [
-    { image: "../src/public/images/utilityImg/chedar.svg", name: "Cheddar", price: "179$" },
-    { image: "../src/public/images/utilityImg/mozarella.svg", name: "Mozzarella", price: "79$" },
-    { image: "../src/public/images/utilityImg/cheeseBorder.svg", name: "Cheese Border", price: "79$" },
-  ];
 
   const toggleAdd = (id: string) => {
     setSelectedAdds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);

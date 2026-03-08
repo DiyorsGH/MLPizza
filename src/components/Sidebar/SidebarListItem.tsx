@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { tick } from "../data"
+import { tick } from "../../data/data"
 
 type SidebarListItemProps = {
     text: string
