@@ -56,7 +56,7 @@ return (
         <button
         key={i}
         onClick={() => select(i)}
-        className={`flex-1 z-10 text-[1.1rem] font-medium transition-colors ${
+        className={`flex-1 z-10 text-medium font-medium transition-colors ${
             active === i ? "text-[var(--orange)]" : "text-gray-700"
         }`}
         >

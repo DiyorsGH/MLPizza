@@ -28,7 +28,7 @@ export default function ToppingsAdds({
       <div className="flex flex-col gap-1 items-center">
 
         <p className="text-[0.9rem]">{name}</p>
-        <p className="toppingPrice text-[0.9rem] text-[var(--orange)] font-bold">
+        <p className="toppingPrice text-small text-[var(--orange)] font-bold">
           {price}
         </p>
       </div>

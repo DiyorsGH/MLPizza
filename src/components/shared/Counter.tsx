@@ -13,14 +13,14 @@ export default function Counter({
     return (
         <div className="w-fit flex items-center justify-between gap-3">
             <button
-                className="hover:brightness-95 w-8 h-8 bg-[var(--orange)] text-white text-[1.2rem] rounded-lg flex items-center justify-center active:scale-[0.96]"
+                className="hover:brightness-95 w-8 h-8 bg-[var(--orange)] text-white text-big rounded-lg flex items-center justify-center active:scale-[0.96]"
                 onClick={decrement}
             >
             −
             </button>
-            <span className="text-lg font-bold">{count}</span>
+            <span className="text-big font-bold">{count}</span>
             <button
-                className="hover:brightness-95 w-8 h-8 bg-[var(--orange)] text-white text-[1.2rem] rounded-lg flex items-center justify-center active:scale-[0.96]"
+                className="hover:brightness-95 w-8 h-8 bg-[var(--orange)] text-white text-big rounded-lg flex items-center justify-center active:scale-[0.96]"
                 onClick={increment}
             >
             +

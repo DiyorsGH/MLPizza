@@ -10,7 +10,18 @@
   --gray: #ececec;
   --gray-dark: #efeeee;
 }
-
+.text-small {
+    font-size: 0.8rem;
+}
+.text-medium {
+    font-size: 1.1rem;
+}
+.text-big {
+    font-size: 1.2rem;
+}
+.text-large {
+    font-size: 2rem;
+}
 body {
   font-family: 'Nunito', sans-serif;
 }

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import MainItem from "../components/MainSection/MainItem";
-import Segmentbar from "../components/Categories/Segmentbar";
 import FilterSidebar from "../components/Sidebar/FilterSidebar";
 import ToppingsModal from "../components/ToppingsModal/ToppingsModal";
 import CartModal from "../components/CartModal/CartModal";
 import usePizzaFilters from "../hooks/usePizzaFilters";
 import Header from "../components/Header/Header";
+import CategoryBar from "../components/CategoryBar/CategoryBar";
 
 import {
   sort,
@@ -13,6 +13,9 @@ import {
 } from "../data/data";
 
 import type { PizzaDataType } from "../data/data";
+
+export let totalPrice: number
+export let tax: number
 
 export default function MainPage() {
   const {
@@ -110,11 +113,12 @@ export default function MainPage() {
   };
 
   const overallAmount = cartItems.reduce((sum, i) => sum + i.count, 0);
-  const totalPrice = cartItems.reduce((sum, item) => {
+  totalPrice = cartItems.reduce((sum, item) => {
     const base = item.pizza.price;
     const adds = item.addsPrice ?? 0;
     return sum + (base + adds) * item.count;
   }, 0);
+  tax = Math.round(totalPrice * 0.05)
 
   useEffect(() => {
     console.log("overall amount:", overallAmount);
@@ -138,30 +142,15 @@ export default function MainPage() {
       
 
       {/* Segmentbar & Sort */}
-      <div className="h-[8vh] w-[80vw] fixed top-[10vh] right-0 px-2 pr-4 border-b-2 border-[var(--gray)] flex items-center justify-between z-[20]">
-        <Segmentbar
-          elems={segments}
-          selectedIndex={activeSegment}
-          onSelect={(i) => setActiveSegment(i)}
-          width="w-[65%]"
-          height="h-[80%]"
+      <CategoryBar
+        segments={segments}
+        activeSegment={activeSegment}
+        setActiveSegment={setActiveSegment}
+        activeSort={activeSort}
+        setActiveSort={setActiveSort}
+        sortOptions={sortOptions}
+        sortIcon={sort}
         />
-        <div className="w-[25%] h-[80%] bg-[var(--gray)] rounded-xl flex items-center justify-center gap-2 px-2">
-          <img src={sort} className="w-5 h-5" />
-          <p className="text-[1.1rem] mr-1">Sort by:</p>
-          <select
-            value={activeSort}
-            onChange={(e) => setActiveSort(Number(e.target.value))}
-            className="bg-transparent appearance-none outline-none text-[var(--orange)] cursor-pointer text-[1.1rem]"
-          >
-            {sortOptions.map((sortOption, index) => (
-              <option key={sortOption} value={index}>
-                {sortOption}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
 
       {/* Sidebar */}
       <FilterSidebar
@@ -225,6 +214,7 @@ export default function MainPage() {
           onClose={() => setIsCartModalOpen(false)}
           overallAmount={overallAmount}
           totalPrice={totalPrice}
+          tax={tax}
         />
       )}
     </>

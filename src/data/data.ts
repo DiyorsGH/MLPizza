@@ -27,6 +27,10 @@ export const sort = "../src/assets/images/utilityImages/sort.svg"
 export const plus = "../src/assets/images/utilityImages/plus.svg"
 export const tick = "../src/assets/images/utilityImages/tick.svg"
 export const emptyCart = "../src/assets/images/utilityImages/emptyCart.svg"
+export const taxIcon = "../src/assets/images/checkout/tax.svg"
+export const delivery = "../src/assets/images/checkout/delivery.svg"
+export const removeIcon = "../src/assets/images/checkout/remove-icon.svg"
+export const box = "../src/assets/images/checkout/box.svg"
 
 // DATA
 export const pizzaData: PizzaDataType[] = [

@@ -96,7 +96,7 @@ export default function ToppingsModal({
         </div>
 
         <div className="w-1/2 flex flex-col justify-between bg-[var(--gray-dark)] p-6">
-          <Title titleContent={pizza.name} bold="font-bold" fontSize="text-[2rem]" />
+          <Title titleContent={pizza.name} bold="font-bold" fontSize="text-large" />
           <p className="text-gray-500">{pizza.ingredients}</p>
 
           <ToppingsSegmentbar
@@ -130,7 +130,7 @@ export default function ToppingsModal({
           </div>
 
           <button
-            className="orangeBtnHover w-[95%] h-[10%] bg-[var(--orange)] rounded-xl text-white text-[1rem]"
+            className="orangeBtnHover w-[95%] h-[10%] bg-[var(--orange)] rounded-xl text-white text-medium"
             onClick={() => {
               onConfirm?.({
                 adds: selectedAdds,
@@ -148,7 +148,7 @@ export default function ToppingsModal({
         <button
           onClick={() => (dialogRef.current as any)?._fadeOutAndClose?.()}
           ref={closeBtnRef}
-          className="absolute top-4 right-4 text-3xl"
+          className="absolute top-4 right-4 text-big"
         >
           ×
         </button>

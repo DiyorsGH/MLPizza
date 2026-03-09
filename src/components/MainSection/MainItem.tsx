@@ -75,22 +75,22 @@ export default function MainItem({
           src={img}
           alt={name}
           className="w-[130px] h-[130px] object-contain bg-white"
-          style={{ clipPath: "circle(47% at 50% 50%)" }}
+          style={{ clipPath: "circle(48% at 50% 50%)" }}
         />
       </div>
 
       <div className="p-2 px-4 flex flex-col justify-between h-[132px]">
-        <span className="text-[1.2rem] font-bold">{name}</span>
+        <span className="text-big font-bold">{name}</span>
 
-        <p className="text-[0.8rem] text-gray-600 flex-1">{ingredients}</p>
+        <p className="text-small text-gray-600 flex-1">{ingredients}</p>
 
         <div className="flex justify-between items-center">
-          <p className="text-lg font-bold">{price} $</p>
+          <p className="text-big font-bold">{price} $</p>
 
           <div className="w-[120px] flex justify-end">
             {pizzaCount === 0 ? (
               <button
-                className="bg-orange-50 h-8 w-[80%] gap-2 rounded-lg flex items-center justify-center text-[1.1rem] transition"
+                className="bg-orange-50 h-8 w-[80%] gap-2 rounded-lg flex items-center justify-center text-medium transition"
                 onClick={() => {
                   openToppingsModal({img, name, ingredients, price, pizzaType, pizzaCategory, purchase})
                 }}

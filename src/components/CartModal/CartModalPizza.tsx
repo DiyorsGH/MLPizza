@@ -37,7 +37,7 @@ function CartModalPizza({
           {pizza.name}
         </p>
 
-        <p className="font-semibold text-sm text-gray-600 mb-1">
+        <p className="font-semibold text-small text-gray-600 mb-1">
           {size}, {crust}, {pizza.pizzaType}
           {adds && adds.length > 0 && `, + ${adds.join(", ")}`}
         </p>
@@ -53,7 +53,7 @@ function CartModalPizza({
           }}
         />
 
-        <span className="text-[1.1rem] text-gray-600">
+        <span className="text-medium text-gray-600">
           {pricePerItem} $ each
         </span>
       </div>

@@ -33,7 +33,7 @@ export default function SidebarListItem({ text, checked = false, onCheckChange }
                 className="appearance-none w-6 h-6 bg-[var(--gray)] rounded cursor-pointer bg-center bg-cover bg-no-repeat"
                 style={{ backgroundImage: isChecked ? `url(${tick})` : "none" }}
             />
-            <label htmlFor={inputId} className="text-[1.1rem] font-medium cursor-pointer">
+            <label htmlFor={inputId} className="text-medium font-medium cursor-pointer">
                 {text}
             </label>
         </li>

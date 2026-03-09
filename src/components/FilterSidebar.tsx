@@ -1,7 +1,7 @@
-import SidebarListItem from "./SidebarListItem"
-import Line from "../shared/Line"
-import SidebarPriceInput from "./SidebarPriceInput"
-import Title from "../shared/Title"
+import SidebarListItem from "./Sidebar/SidebarListItem"
+import Line from "./shared/Line"
+import SidebarPriceInput from "./Sidebar/SidebarPriceInput"
+import Title from "./shared/Title"
 import type { Dispatch, SetStateAction } from "react"
 
 type FilterSidebarProps = {
@@ -53,17 +53,17 @@ export default function FilterSidebar({
             <SidebarListItem text="New" checked={draftSelectedPizzaTypes.includes("new")} onCheckChange={handlePizzaTypeChange} />
             <SidebarListItem text="Classic" checked={draftSelectedPizzaTypes.includes("classic")} onCheckChange={handlePizzaTypeChange} />
 
-            <Line width="w-full" margin="my-4"/>
+            <Line width="w-full" isMargin={true}/>
 
-            <Title titleContent="Price from & to" fontSize="text-big" margin="mb-3" />
+            <Title titleContent="Price from & to" fontSize="text-xl" margin="mb-3" />
             <div className="flex gap-4">
                 <SidebarPriceInput currency="$" value={draftPriceFrom} onChange={setDraftPriceFrom} />
                 <SidebarPriceInput currency="$" value={draftPriceTo} onChange={setDraftPriceTo} />
             </div>
 
-            <Line width="w-full" margin="my-4"/>
+            <Line width="w-full" isMargin={true}/>
 
-            <Title titleContent="Ingredients" fontSize="text-big" margin="mb-3" />
+            <Title titleContent="Ingredients" fontSize="text-xl" margin="mb-3" />
             {sidebarIngredients.map(ingredient => (
                 <SidebarListItem
                     key={ingredient}
@@ -75,12 +75,12 @@ export default function FilterSidebar({
 
             <button
                 onClick={submitFilters}
-                className="orangeBtnHover w-full h-12 bg-[var(--orange)] text-white rounded-xl mt-4 font-medium text-big"
+                className="orangeBtnHover w-full h-12 bg-[var(--orange)] text-white rounded-xl mt-4 font-medium text-[1.2rem]"
             >Submit</button>
 
             <button
                 onClick={resetFilters}
-                className="orangeBtnHover w-full h-12 bg-[var(--orange)] text-white rounded-xl mt-4 font-medium text-big"
+                className="orangeBtnHover w-full h-12 bg-[var(--orange)] text-white rounded-xl mt-4 font-medium text-[1.2rem]"
             >Reset</button>
         </aside>
     )
