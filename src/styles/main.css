@@ -1,0 +1,295 @@
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+/* Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design tokens ────────────────────────────────────────────────────────── */
+:root {
+	--accent-hue: 22;
+	--orange: hsl(var(--accent-hue) 100% 50%);
+	--orange-light: hsl(var(--accent-hue) 100% 96%);
+	--orange-soft: hsl(var(--accent-hue) 100% 98%);
+	--accent-shadow: hsl(var(--accent-hue) 90% 45% / 0.24);
+	--gray: #f4f4f4;
+	--gray-dark: #e5e5e5;
+	--app-bg: hsl(var(--accent-hue) 32% 96%);
+	--surface: #ffffff;
+	--surface-soft: hsl(var(--accent-hue) 36% 95%);
+	--surface-strong: hsl(var(--accent-hue) 34% 91%);
+	--overlay-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+	--text-main: #171717;
+	--text-muted: #5f6470;
+	--success-bg: #e7faf4;
+	--success-text: #0aa57a;
+	--danger-bg: #ffeceb;
+	--danger-text: #ff5f57;
+	--warning-bg: #fff3c9;
+	--warning-text: #b98d00;
+	color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+	--gray: #202833;
+	--gray-dark: #344152;
+	--app-bg: hsl(var(--accent-hue) 24% 8%);
+	--surface: hsl(var(--accent-hue) 18% 12%);
+	--surface-soft: hsl(var(--accent-hue) 20% 16%);
+	--surface-strong: hsl(var(--accent-hue) 22% 22%);
+	--overlay-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+	--text-main: #f8fafc;
+	--text-muted: #c3ccd7;
+	--orange-light: hsl(var(--accent-hue) 70% 20% / 0.48);
+	--orange-soft: hsl(var(--accent-hue) 58% 16% / 0.72);
+	--accent-shadow: hsl(var(--accent-hue) 90% 55% / 0.34);
+	--success-bg: rgba(14, 165, 122, 0.18);
+	--success-text: #6ee7b7;
+	--danger-bg: rgba(255, 95, 87, 0.18);
+	--danger-text: #fda4af;
+	--warning-bg: rgba(251, 191, 36, 0.16);
+	--warning-text: #fde68a;
+	color-scheme: dark;
+}
+
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+body {
+	font-family: "Nunito", sans-serif;
+	font-size: 16.5px;
+	font-weight: 450;
+	line-height: 1.5;
+	background-color: var(--app-bg);
+	color: var(--text-main);
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
+#root {
+	min-height: 100vh;
+}
+
+.app-shell {
+	background-color: var(--app-bg);
+	color: var(--text-main);
+}
+
+.app-surface {
+	background-color: var(--surface);
+	color: var(--text-main);
+}
+
+.app-surface-soft {
+	background-color: var(--surface-soft);
+}
+
+.app-surface-strong {
+	background-color: var(--surface-strong);
+}
+
+.app-muted {
+	color: var(--text-muted);
+}
+
+.input {
+	color: var(--text-main);
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+.input::placeholder {
+	color: var(--text-muted);
+}
+
+.app-danger-text {
+	color: var(--danger-text);
+}
+
+.app-danger-surface {
+	background-color: var(--danger-bg);
+}
+
+.app-success-text {
+	color: var(--success-text);
+}
+
+.app-success-surface {
+	background-color: var(--success-bg);
+}
+
+.app-header {
+	position: sticky;
+	top: 0;
+	z-index: 40;
+	background-color: color-mix(in srgb, var(--surface) 92%, transparent);
+	backdrop-filter: blur(14px);
+}
+
+:focus-visible {
+	outline: 2px solid var(--orange);
+	outline-offset: 2px;
+}
+
+/* ─── Text scale ───────────────────────────────────────────────────────────── */
+.text-small {
+	font-size: 0.9rem;
+}
+.text-medium {
+	font-size: 1.16rem;
+}
+.text-big {
+	font-size: 1.3rem;
+}
+.text-large {
+	font-size: 2.12rem;
+}
+
+/* ─── Button helpers ───────────────────────────────────────────────────────── */
+.orangeBtn-styles {
+	background-color: var(--orange);
+	color: white;
+	border-radius: 0.75rem;
+}
+
+/* ─── Close button ─────────────────────────────────────────────────────────── */
+.closeBtn {
+	font-size: 2rem;
+	line-height: 1;
+	color: var(--text-muted);
+	transition: color 0.15s;
+}
+.closeBtn:hover {
+	color: var(--text-main);
+}
+
+/* ─── Scrollbars ───────────────────────────────────────────────────────────── */
+.round-scrollbar::-webkit-scrollbar {
+	width: 6px;
+}
+.round-scrollbar::-webkit-scrollbar-thumb {
+	background-color: var(--gray-dark);
+	border-radius: 18px;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+.hide-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+/* ─── Topping card ─────────────────────────────────────────────────────────── */
+.toppingCard:hover .toppingPrice {
+	color: var(--orange);
+}
+
+/* ─── Dotted price line ────────────────────────────────────────────────────── */
+.dots {
+	flex: 1;
+	border-bottom: 2px dotted
+		color-mix(in srgb, var(--text-main) 45%, transparent);
+	margin: 0 8px;
+}
+
+/* ─── Skeleton shimmer ─────────────────────────────────────────────────────── */
+.skeleton {
+	position: relative;
+	overflow: hidden;
+	background-color: var(--gray);
+}
+.skeleton::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(
+		90deg,
+		transparent 0%,
+		color-mix(in srgb, var(--surface) 72%, transparent) 50%,
+		transparent 100%
+	);
+	animation: skeleton-shimmer 1.4s infinite;
+}
+@keyframes skeleton-shimmer {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(200%);
+	}
+}
+
+/* ─── Toppings modal animations ────────────────────────────────────────────── */
+.toppingsModalAppear {
+	animation: fadeIn 0.3s ease-out forwards;
+}
+.toppingsModalDisappear {
+	animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+}
+
+/* ─── Cart modal animations ────────────────────────────────────────────────── */
+.cartModalAppear {
+	animation: slideIn 0.3s ease-out forwards;
+}
+.cartModalDisappear {
+	animation: slideOut 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+@keyframes slideOut {
+	from {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+}
+
+.customCheckbox {
+	background-image: url("../assets/images/utilityImages/tick-icon.svg");
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
