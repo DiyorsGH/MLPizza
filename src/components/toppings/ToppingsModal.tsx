@@ -77,9 +77,9 @@ export default function ToppingsModal({
 
 	return (
 		<dialog
-			ref={dialogRef}
-			className="w-[75vw] h-[clamp(80vh, 80vh, 90vh)] fixed p-0 z-[60] rounded-2xl"
-		>
+  ref={dialogRef}
+  className="w-[95vw] h-[90vh] sm:w-[75vw] sm:h-[clamp(80vh, 80vh, 90vh)] fixed p-0 z-[60] rounded-2xl"
+>
 			<div
 				data-modal-container
 				className="flex flex-col sm:flex-row w-full h-full app-surface sm:rounded-2xl overflow-hidden"
@@ -154,7 +154,7 @@ export default function ToppingsModal({
 							fontSize="text-2xl"
 							margin="mb-2"
 						/>
-						<div className="flex gap-2">
+						<div className="flex gap-2 overflow-x-auto p-1 round-scrollbar">
 							{addsData.map((add) => (
 								<ToppingsAdds
 									key={add.name}
