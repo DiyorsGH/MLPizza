@@ -226,8 +226,6 @@ export default function CheckoutPage() {
 		}
 	};
 
-	const returnHandle = () => navigate("/");
-
 	const countryOptions: Option[] = useMemo(
 		() =>
 			csc.Country.getAllCountries().map((c) => ({
@@ -457,12 +455,6 @@ export default function CheckoutPage() {
 			<header className="app-header h-16 w-full fixed top-0 left-0 border-b border-[var(--gray-dark)] flex justify-between items-center px-[2vw] z-50">
 				<Logo />
 				<div className="flex items-center gap-2">
-					<button
-						className="sm:flex items-center gap-2 border-2 border-[var(--orange)] text-[var(--orange)] rounded-xl px-3 h-9 font-semibold text-[1rem] hover:bg-[var(--orange-light)] transition"
-						onClick={returnHandle}
-					>
-						←
-					</button>
 					<LangSwitcher />
 					{user ? (
 						<ProfileMenu
@@ -533,7 +525,7 @@ export default function CheckoutPage() {
 								<Title titleContent="Personal information" fontSize="text-xl" />
 							</div>
 							<div className="border-t" />
-							<div className="p-6 grid grid-cols-2 gap-6">
+							<div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
 								{/* Name */}
 								<div className="flex flex-col gap-1">
 									<input

@@ -160,8 +160,9 @@ export default function PizzaCard({
 		const totalItemPrice = pricePerItem * count;
 
 		return (
-			<div className="flex items-center justify-between py-5 px-2 border-b last:border-none gap-2">
-				<div className="flex items-center gap-3 w-[55%] min-w-0">
+			<div className="flex flex-wrap md:flex-nowrap items-center justify-between py-5 px-2 border-b last:border-none gap-4">
+				{/* Left block */}
+				<div className="flex items-center gap-3 flex-1 min-w-0">
 					<img
 						src={pizza.img}
 						alt={localizedName}
@@ -169,12 +170,17 @@ export default function PizzaCard({
 						decoding="async"
 						className="w-[64px] h-[64px] object-contain shrink-0"
 					/>
-					<div className="flex flex-col min-w-0">
-						<p className="font-semibold text-base truncate">{localizedName}</p>
-						<p className="app-muted text-xs truncate">
+
+					<div className="flex flex-col justify-center min-w-0 gap-1">
+						<p className="font-semibold text-base leading-tight break-words">
+							{localizedName}
+						</p>
+
+						<p className="app-muted text-xs leading-tight break-words">
 							{localizedSize && `${localizedSize}`}
 							{localizedCrust && `, ${localizedCrust}`}
 						</p>
+
 						{adds && adds.length > 0 && (
 							<p className="app-muted text-xs truncate">
 								+ {adds.map((add) => getLocalizedAddName(add, lang)).join(", ")}
@@ -183,19 +189,22 @@ export default function PizzaCard({
 					</div>
 				</div>
 
-				<span className="font-bold text-base whitespace-nowrap">
-					{totalItemPrice} $
-				</span>
+				{/* Right block */}
+				<div className="flex items-center gap-4 md:gap-6 w-full md:w-auto justify-end mt-3 md:mt-0">
+					<span className="font-bold text-base whitespace-nowrap">
+						{totalItemPrice} $
+					</span>
 
-				<Counter count={count} setCount={(n) => onChangeCount?.(pizza, n)} />
+					<Counter count={count} setCount={(n) => onChangeCount?.(pizza, n)} />
 
-				<button
-					onClick={() => onRemove?.(pizza)}
-					className="app-muted hover:text-[var(--text-main)] text-3xl leading-none transition ml-1"
-					aria-label="Remove item"
-				>
-					×
-				</button>
+					<button
+						onClick={() => onRemove?.(pizza)}
+						className="app-muted hover:text-[var(--text-main)] text-3xl leading-none transition"
+						aria-label="Remove item"
+					>
+						×
+					</button>
+				</div>
 			</div>
 		);
 	}

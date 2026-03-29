@@ -31,9 +31,11 @@ export default function ToppingsModal({
 }: ToppingsModalProps) {
 	const { lang } = useLanguage();
 	const dialogRef = useRef<HTMLDialogElement>(null);
+
 	const [selectedSize, setSelectedSize] = useState<string | null>(null);
 	const [selectedCrust, setSelectedCrust] = useState<string | null>(null);
 	const [selectedAdds, setSelectedAdds] = useState<string[]>([]);
+
 	const localizedPizzaName = getLocalizedPizzaName(pizza.name, lang);
 
 	const pizzaSizes = ["Small", "Medium", "Large"];
@@ -42,17 +44,18 @@ export default function ToppingsModal({
 	useEffect(() => {
 		if (!selectedSize) setSelectedSize(pizzaSizes[0]);
 		if (!selectedCrust) setSelectedCrust(doughTypes[0]);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const toggleAdd = (id: string) =>
+	const toggleAdd = (id: string) => {
 		setSelectedAdds((prev) =>
 			prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
 		);
+	};
 
 	const addOnsPrice = selectedAdds.reduce((sum, id) => {
 		const add = addsData.find((a) => a.name === id);
 		if (!add) return sum;
+
 		const num = Number(add.price.replace(/[^0-9.-]+/g, ""));
 		return sum + (isNaN(num) ? 0 : num);
 	}, 0);
@@ -77,50 +80,50 @@ export default function ToppingsModal({
 
 	return (
 		<dialog
-  ref={dialogRef}
-  className="w-[95vw] h-[90vh] sm:w-[75vw] sm:h-[clamp(80vh, 80vh, 90vh)] fixed p-0 z-[60] rounded-2xl"
->
+			ref={dialogRef}
+			className="w-screen h-[60dvh] md:w-[75vw] md:h-[70vh] fixed p-0 z-[60] rounded-2xl"
+		>
 			<div
 				data-modal-container
-				className="flex flex-col sm:flex-row w-full h-full app-surface sm:rounded-2xl overflow-hidden"
+				className="flex flex-col md:flex-row w-full h-full app-surface md:rounded-2xl overflow-hidden"
 			>
-				{/* Pizza image — hidden on very small screens, shown on sm+ */}
-				<div className="hidden sm:flex sm:w-1/2 items-center justify-center app-surface-soft p-6">
-					{/* <div className="absolute w-[384px] h-[384px] rounded-full border-2 border-dashed border-orange-300 mr-5 mb-5"></div> */}
-
+				{/* Desktop image */}
+				<div className="hidden md:flex md:w-1/2 items-center justify-center app-surface-soft p-6">
 					<img
 						src={pizza.img || ""}
 						alt={pizza.name}
 						loading="eager"
 						decoding="async"
-						className={`absolute w-full max-w-[320px] object-cover ${selectedSize == "Medium" ? "scale-1" : selectedSize == "Small" ? "scale-[0.8]" : "scale-[1.2]"} transition duration-300`}
-						style={{
-							clipPath: "circle(50% at center)",
-						}}
+						className={`absolute w-full max-w-[320px] object-cover ${
+							selectedSize === "Medium"
+								? "scale-100"
+								: selectedSize === "Small"
+									? "scale-75"
+									: "scale-125"
+						} transition duration-300`}
+						style={{ clipPath: "circle(50% at center)" }}
 					/>
 				</div>
 
-				{/* Right / Content panel */}
-				<div className="flex-1 flex flex-col gap-4 bg-[var(--gray)] p-5 sm:p-6 overflow-y-auto round-scrollbar">
-					{/* Mobile pizza image (compact) */}
-					<div className="flex items-center gap-4 sm:hidden">
+				{/* Content */}
+				<div className="flex-1 flex flex-col gap-4 bg-[var(--gray)] p-5 md:p-6 overflow-y-auto round-scrollbar">
+					{/* Mobile header */}
+					<div className="flex items-center gap-4 md:hidden">
 						<img
 							src={pizza.img || ""}
 							alt={localizedPizzaName}
 							decoding="async"
 							className="w-20 h-20 object-contain"
 						/>
-						<div>
-							<Title
-								titleContent={localizedPizzaName}
-								bold="font-bold"
-								fontSize="text-xl"
-							/>
-						</div>
+						<Title
+							titleContent={localizedPizzaName}
+							bold="font-bold"
+							fontSize="text-xl"
+						/>
 					</div>
 
 					{/* Desktop title */}
-					<div className="hidden sm:block">
+					<div className="hidden md:block">
 						<Title
 							titleContent={localizedPizzaName}
 							bold="font-bold"
@@ -154,6 +157,7 @@ export default function ToppingsModal({
 							fontSize="text-2xl"
 							margin="mb-2"
 						/>
+
 						<div className="flex gap-2 overflow-x-auto p-1 round-scrollbar">
 							{addsData.map((add) => (
 								<ToppingsAdds
@@ -174,7 +178,7 @@ export default function ToppingsModal({
 					</Button>
 				</div>
 
-				{/* Close button */}
+				{/* Close */}
 				<button
 					onClick={closeDialog}
 					className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-lg bg-[var(--surface)]/90 app-muted hover:text-[var(--text-main)] text-xl transition shadow-sm"
