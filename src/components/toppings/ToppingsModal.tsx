@@ -48,7 +48,7 @@ export default function ToppingsModal({
 
 	const toggleAdd = (id: string) => {
 		setSelectedAdds((prev) =>
-			prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+			prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
 		);
 	};
 
@@ -81,7 +81,7 @@ export default function ToppingsModal({
 	return (
 		<dialog
 			ref={dialogRef}
-			className="w-screen h-[60dvh] md:w-[75vw] md:h-[70vh] fixed p-0 z-[60] rounded-2xl"
+			className="w-screen h-[100dvh] md:w-[75vw] md:h-[70vh] fixed p-0 z-[60] rounded-2xl"
 		>
 			<div
 				data-modal-container
@@ -98,27 +98,27 @@ export default function ToppingsModal({
 							selectedSize === "Medium"
 								? "scale-100"
 								: selectedSize === "Small"
-									? "scale-75"
-									: "scale-125"
+								? "scale-75"
+								: "scale-125"
 						} transition duration-300`}
 						style={{ clipPath: "circle(50% at center)" }}
 					/>
 				</div>
 
 				{/* Content */}
-				<div className="flex-1 flex flex-col gap-4 bg-[var(--gray)] p-5 md:p-6 overflow-y-auto round-scrollbar">
+				<div className="flex-1 flex flex-col gap-5 md:gap-4 bg-[var(--gray)] p-5 md:p-6 overflow-y-auto round-scrollbar">
 					{/* Mobile header */}
 					<div className="flex items-center gap-4 md:hidden">
 						<img
 							src={pizza.img || ""}
 							alt={localizedPizzaName}
 							decoding="async"
-							className="w-20 h-20 object-contain"
+							className="w-24 h-24 object-contain"
 						/>
 						<Title
 							titleContent={localizedPizzaName}
 							bold="font-bold"
-							fontSize="text-xl"
+							fontSize="text-2xl"
 						/>
 					</div>
 
@@ -134,22 +134,25 @@ export default function ToppingsModal({
 						</p>
 					</div>
 
+					{/* Sizes */}
 					<Segmentbar
 						elems={pizzaSizes}
 						width="w-full"
-						height="h-12"
+						height="h-14 md:h-12"
 						onSelect={(i) => setSelectedSize(pizzaSizes[i])}
 						shape="pill"
 					/>
 
+					{/* Dough */}
 					<Segmentbar
 						elems={doughTypes}
 						width="w-full"
-						height="h-12"
+						height="h-14 md:h-12"
 						onSelect={(i) => setSelectedCrust(doughTypes[i])}
 						shape="pill"
 					/>
 
+					{/* Toppings */}
 					<div>
 						<Title
 							titleContent="Toppings"
@@ -157,8 +160,7 @@ export default function ToppingsModal({
 							fontSize="text-2xl"
 							margin="mb-2"
 						/>
-
-						<div className="flex gap-2 overflow-x-auto p-1 round-scrollbar">
+						<div className="flex gap-3 overflow-x-auto pb-2 snap-x">
 							{addsData.map((add) => (
 								<ToppingsAdds
 									key={add.name}
@@ -173,7 +175,8 @@ export default function ToppingsModal({
 						</div>
 					</div>
 
-					<Button onClick={handleConfirm}>
+					{/* Confirm button */}
+					<Button className="h-14 md:h-12 text-base md:text-sm" onClick={handleConfirm}>
 						<Translate>Add to cart</Translate> — {totalPrice} $
 					</Button>
 				</div>
